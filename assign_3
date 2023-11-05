@@ -1,0 +1,76 @@
+create table student
+(
+	roll_no int primary key,
+    name char(20),
+    address char(40),
+    phone int,
+    age int
+);
+drop table student;
+
+insert into student values
+(1,'harsh','delhi','95462178',18);
+
+insert into student values
+(2,'pratik','bihar','95468448',19);
+
+insert into student values
+(3,'priyanka','siliguri','95151618',20);
+
+insert into student values
+(4,'riyanka','ramnagar','951456458',18);
+
+insert into student values
+(5,'saptarhi','kolkata','95151618',19);
+
+create table studentCourse
+(
+	cid int,
+    roll_no int,
+    foreign key(roll_no) references student(roll_no)
+);
+
+insert into studentCourse values(1,1);
+
+insert into studentCourse values(2,2);
+
+insert into studentCourse values(2,3);
+
+insert into studentCourse values(3,4);
+
+insert into studentCourse values(1,5);
+
+select * from studentCourse;
+
+-- INNER JOIN
+select * from student inner join studentCourse on student.roll_no = studentCourse.roll_no;
+
+-- LEFT JOIN
+select * from student left join studentCourse on student.roll_no = studentCourse.roll_no;
+
+-- RIGHT JOIN
+select * from student right join studentCourse on student.roll_no = studentCourse.roll_no;
+
+-- CROSS JOIN
+select * from student cross join studentCourse;
+
+-- VIEW Opearion
+create view stud 
+as 
+select roll_no, name FROM student;
+
+update stud set name='ram' where roll_no = 3;
+insert into stud values(6,'yash');
+select * from stud;
+drop view stud;
+
+-- SUB QUERY
+SELECT name
+FROM student
+WHERE roll_no
+IN (SELECT cid FROM studentCourse);
+
+UPDATE student
+SET age=age+1
+WHERE roll_no
+IN (SELECT cid FROM studentCourse);
