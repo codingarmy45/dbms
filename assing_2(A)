@@ -1,0 +1,70 @@
+-- CREATION OF TABLE
+create table employee
+(
+    id int primary key,
+    name varchar(255),
+    salary int    
+);
+
+-- INSERTION OPEATION
+insert into employee
+values
+(1,'yash',10000);
+
+insert into employee
+values
+(2,'Ram',20000);
+
+insert into employee
+values
+(3,'Sham',30000);
+
+-- ALTER OPERATION
+alter table employee add age int;
+alter table employee modify age varchar(255);
+ALTER TABLE employee RENAME COLUMN salary TO salary_name;
+alter table employee rename to emp; 
+
+select * from emp;
+
+
+-- VIEW OPERATION
+create view emp
+as
+select name, salary from employee;
+DROP VIEW EMP;
+
+-- INDEX OPERATION
+CREATE INDEX idx_users ON emp (id,name);
+DROP INDEX idx_users;
+alter index idx_users RENAME TO idx;
+
+-- SEQUENCE OPERATION
+create sequence seq3
+minvalue -1
+maxvalue 9999999
+start with 1
+increment by 1
+nocycle;
+
+CREATE TABLE students
+( 
+ID number(10),
+NAME char(20)
+);
+
+INSERT into students VALUES
+(seq3.nextval,'Shubham');
+INSERT into students VALUES
+(seq3.nextval,'Aman');
+
+select * from students;
+
+drop sequence seq3;
+
+-- SYNONYM OPEARATION
+
+create public synonym cust_name
+for customers.cust_name
+
+drop public synonym cust_name
