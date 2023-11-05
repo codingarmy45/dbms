@@ -1,0 +1,22 @@
+db.sales.insertMany([
+    { product: "Product A", quantity: 10, price: 20 },
+    { product: "Product B", quantity: 5, price: 15 },
+    { product: "Product A", quantity: 8, price: 22 },
+    { product: "Product C", quantity: 12, price: 18 },
+]);
+
+var mapFunction = function() {
+    emit(this.product, this.quantity * this.price);
+};
+
+var reduceFunction = function(key, values) {
+    return Array.sum(values);
+};
+
+db.sales.mapReduce(
+    mapFunction,
+    reduceFunction,
+    { out: "sales_summary" }
+);
+
+db.sales_summary.find();
