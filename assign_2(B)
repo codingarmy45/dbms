@@ -1,0 +1,78 @@
+-- Create, Insert, Update, Delete
+-- CREATE
+create table empp(
+	emp_id int primary key,
+    emp_fname varchar(255),
+    emp_lname varchar(255),
+    emp_salary int
+);
+
+drop table empp;
+
+-- INSERT
+insert into empp values
+(1,'Ram', 'Kapoor', '20000');
+
+insert into empp values
+(2,'Raj', 'Kapoor', '40000');
+
+insert into empp values
+(3,'Ramesh', 'Kapoor', '400');
+
+-- UPDATE
+update empp set emp_salary = 10000 where emp_id = 3;
+
+-- DELETE
+delete from empp where emp_id = 3;
+
+insert into empp values
+(null,'Ramesh', 'Kapoor', '400', '2017-08-23');
+
+-- Aggregate function
+select avg(emp_salary) from empp;
+select min(emp_salary) from empp;
+select max(emp_salary) from empp;
+select sum(emp_salary) from empp;
+
+-- Like, in, not in, between operator
+select * from empp where emp_fname like 'Ram%';
+select * from empp where emp_id in('1','2');
+select * from empp where emp_id not in ('1', '2');
+select * from empp where emp_salary between 10000 and 20000;
+
+-- SET Operator
+create table cust
+(
+	cust_id INT primary key,
+    cust_fname VARCHAR(255),
+    cust_lname VARCHAR(255),
+    age int
+);
+
+drop table cust;
+insert into cust 
+values
+(1,'Ram', 'Kapoor', '20000');
+
+insert into cust 
+values
+(13, 'B', 'Y', '20');
+
+insert into cust 
+values
+(14, 'C', 'Z', '24');
+
+-- UNION
+select * from empp
+UNION
+select * from cust;
+
+-- INTERSECT
+select * from empp
+INTERSECT
+select * from cust;
+
+-- MINUS
+select * from empp
+MINUS
+select * from cust;
