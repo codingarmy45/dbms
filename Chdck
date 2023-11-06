@@ -1,0 +1,30 @@
+-- Create a PL/SQL block
+DECLARE
+  -- Declare a local procedure to raise the salary
+  PROCEDURE raise_salary(p_empid NUMBER, p_bonus NUMBER) IS
+    v_new_salary NUMBER;
+  BEGIN
+    -- Calculate the new salary by adding the bonus
+    SELECT sal + p_bonus INTO v_new_salary
+    FROM EMP
+    WHERE empno = p_empid;
+
+    -- Update the employee's salary in the database
+    UPDATE EMP
+    SET sal = v_new_salary
+    WHERE empno = p_empid;
+
+    -- Commit the transaction to save the changes
+    COMMIT;
+
+    -- Display a message
+    DBMS_OUTPUT.PUT_LINE('Salary raised by ' || p_bonus || ' for Employee ID ' || p_empid);
+  END raise_salary;
+
+  -- Call the raise_salary procedure
+  emp_id_to_raise NUMBER := 7369; -- Replace with the desired employee ID
+  bonus_amount NUMBER := 1000;   -- Replace with the desired bonus amount
+BEGIN
+  raise_salary(emp_id_to_raise, bonus_amount);
+END;
+/
