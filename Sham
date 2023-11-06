@@ -1,0 +1,7 @@
+CREATE OR REPLACE LOCAL PROCEDURE raise_salary (empid IN NUMBER, bonus IN NUMBER) IS
+BEGIN
+  SELECT salary INTO v_old_salary FROM employees WHERE employee_id = empid;
+  v_old_salary := v_old_salary + bonus;
+  UPDATE employees SET salary = v_old_salary WHERE employee_id = empid;
+END raise_salary;
+/
